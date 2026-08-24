@@ -64,7 +64,7 @@ export default function DashboardPage() {
         setOpvReports(opvRes.items || []);
       } catch {
         setError(
-          "Failed to load dashboard data. Make sure the FastAPI backend is running on http://localhost:8000"
+          "Failed to load dashboard data. The backend API may be starting up or unavailable."
         );
       } finally {
         setLoading(false);
