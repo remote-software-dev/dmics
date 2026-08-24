@@ -1,0 +1,154 @@
+{
+  "GET /api/v1/provinces/": {
+    "description": "List all provinces",
+    "method": "GET",
+    "url": "/api/v1/provinces/",
+    "query_params": {},
+    "expected_status": 200,
+    "expected_response_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "code", "name", "is_active"],
+        "properties": {
+          "id": {"type": "string", "format": "uuid"},
+          "code": {"type": "string"},
+          "name": {"type": "string"},
+          "latitude": {"type": "number", "nullable": true},
+          "longitude": {"type": "number", "nullable": true},
+          "is_active": {"type": "boolean"},
+          "created_at": {"type": "string", "nullable": true},
+          "updated_at": {"type": "string", "nullable": true}
+        }
+      }
+    },
+    "sample_response": [
+      {
+        "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+        "code": "31",
+        "name": "DKI Jakarta",
+        "latitude": -6.2088,
+        "longitude": 106.8456,
+        "is_active": true,
+        "created_at": "2025-01-01T00:00:00Z",
+        "updated_at": "2025-01-01T00:00:00Z"
+      }
+    ]
+  },
+  "GET /api/v1/provinces/{id}": {
+    "description": "Get province by UUID",
+    "method": "GET",
+    "url": "/api/v1/provinces/f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "expected_status": 200,
+    "expected_response_schema": {
+      "type": "object",
+      "required": ["id", "code", "name", "is_active"]
+    }
+  },
+  "GET /api/v1/districts/": {
+    "description": "List all districts",
+    "method": "GET",
+    "url": "/api/v1/districts/",
+    "expected_status": 200,
+    "expected_response_schema": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "code", "province_id", "name", "is_active"],
+        "properties": {
+          "id": {"type": "string", "format": "uuid"},
+          "code": {"type": "string"},
+          "province_id": {"type": "string", "format": "uuid"},
+          "name": {"type": "string"},
+          "latitude": {"type": "number", "nullable": true},
+          "longitude": {"type": "number", "nullable": true},
+          "is_active": {"type": "boolean"}
+        }
+      }
+    }
+  },
+  "POST /api/v1/reports/submit": {
+    "description": "Submit a vaccination report",
+    "method": "POST",
+    "url": "/api/v1/reports/submit",
+    "request_body": {
+      "date": "2025-08-01",
+      "campaign_type": "mr",
+      "balita_count": 150
+    },
+    "expected_status": 201,
+    "business_rules": [
+      "date must be <= today",
+      "campaign_type must be 'mr' or 'opv'",
+      "balita_count must be >= 0",
+      "subdistrict_code, id_puskesmas, province, district, puskesmas auto-filled from user"
+    ]
+  },
+  "POST /api/v1/reports/revision/{id}": {
+    "description": "Revise a report (only after 5PM)",
+    "method": "PUT",
+    "url": "/api/v1/reports/revision/11111111-1111-1111-1111-111111111111",
+    "request_body": {
+      "type": "mr",
+      "new_value": 200
+    },
+    "expected_status": 200,
+    "business_rules": [
+      "Only available after 17:00 (5PM)",
+      "Preserves original value in balita_mr_ori / balita_opv_ori",
+      "Preserves original date in date_ori"
+    ]
+  },
+  "POST /api/v1/rca": {
+    "description": "Submit RCA report (channel='rca')",
+    "method": "POST",
+    "url": "/api/v1/rca",
+    "request_body": {
+      "date": "2025-08-01",
+      "province": "DKI Jakarta",
+      "district": "Kepulauan Seribu",
+      "puskesmas": "Puskesmas Kep. Seribu Utara",
+      "campaign_type": "mr",
+      "balita_count": 75
+    },
+    "expected_status": 201,
+    "business_rules": [
+      "channel is set to 'rca' (not 'dashboard')",
+      "Location fields are manually entered (not auto-filled from user)"
+    ]
+  },
+  "GET /api/v1/reports/daily": {
+    "description": "Get daily report summary",
+    "method": "GET",
+    "url": "/api/v1/reports/daily?date_from=2025-08-01&date_to=2025-08-07",
+    "expected_status": 200,
+    "business_rules": [
+      "Max date range: 7 days",
+      "Returns one entry per day even if no reports"
+    ]
+  },
+  "GET /api/v1/dashboard": {
+    "description": "Dashboard aggregated data",
+    "method": "GET",
+    "url": "/api/v1/dashboard",
+    "expected_status": 200,
+    "expected_response_schema": {
+      "type": "object",
+      "properties": {
+        "totalProvinces": {"type": "integer"},
+        "totalDistricts": {"type": "integer"},
+        "totalSubdistricts": {"type": "integer"},
+        "totalPuskesmas": {"type": "integer"},
+        "totalMrReports": {"type": "integer"},
+        "totalOpvReports": {"type": "integer"},
+        "totalReports": {"type": "integer"},
+        "totalVaccinatedMr": {"type": "integer"},
+        "totalVaccinatedOpv": {"type": "integer"},
+        "totalPopulationMr": {"type": "integer"},
+        "totalPopulationOpv": {"type": "integer"},
+        "mrCoverage": {"type": "number"},
+        "opvCoverage": {"type": "number"}
+      }
+    }
+  }
+}

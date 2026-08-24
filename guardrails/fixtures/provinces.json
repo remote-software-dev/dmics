@@ -1,0 +1,52 @@
+[
+  {
+    "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "code": "31",
+    "name": "DKI Jakarta",
+    "latitude": -6.2088,
+    "longitude": 106.8456,
+    "is_active": true,
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  },
+  {
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "code": "32",
+    "name": "Jawa Barat",
+    "latitude": -6.9175,
+    "longitude": 107.6191,
+    "is_active": true,
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  },
+  {
+    "id": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    "code": "33",
+    "name": "Jawa Tengah",
+    "latitude": -7.1510,
+    "longitude": 110.1403,
+    "is_active": true,
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  },
+  {
+    "id": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+    "code": "34",
+    "name": "DI Yogyakarta",
+    "latitude": -7.7956,
+    "longitude": 110.3695,
+    "is_active": true,
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  },
+  {
+    "id": "d4e5f6a7-b8c9-0123-defa-234567890123",
+    "code": "35",
+    "name": "Jawa Timur",
+    "latitude": -7.5361,
+    "longitude": 112.2384,
+    "is_active": false,
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  }
+]

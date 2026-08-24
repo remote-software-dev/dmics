@@ -1,0 +1,35 @@
+[
+  {
+    "id": "e5f6a7b8-c9d0-1234-efab-345678901234",
+    "code": "3101",
+    "province_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "name": "Kepulauan Seribu",
+    "latitude": -5.7203,
+    "longitude": 106.5580,
+    "is_active": true,
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  },
+  {
+    "id": "f6a7b8c9-d0e1-2345-fabc-456789012345",
+    "code": "3171",
+    "province_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "name": "Jakarta Pusat",
+    "latitude": -6.1862,
+    "longitude": 106.8341,
+    "is_active": true,
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  },
+  {
+    "id": "a7b8c9d0-e1f2-3456-abcd-567890123456",
+    "code": "3201",
+    "province_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "Bogor",
+    "latitude": -6.5971,
+    "longitude": 106.8060,
+    "is_active": true,
+    "created_at": "2025-01-01T00:00:00Z",
+    "updated_at": "2025-01-01T00:00:00Z"
+  }
+]
