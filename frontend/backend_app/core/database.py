@@ -36,17 +36,12 @@ def _get_engine():
         _engine_kwargs["pool_size"] = 5
         _engine_kwargs["max_overflow"] = 2
 
-    use_ssl = False
-    if "neon.tech" in url or "sslmode" in url:
-        use_ssl = True
+    use_ssl = "neon.tech" in url or "sslmode" in url
 
-    if "sslmode" in url:
-        from urllib.parse import urlparse, parse_qs, urlunparse
+    if "?" in url and not url.startswith("sqlite"):
+        from urllib.parse import urlparse, urlunparse
         parsed = urlparse(url)
-        qs = parse_qs(parsed.query)
-        qs.pop("sslmode", None)
-        new_query = "&".join(f"{k}={v[0]}" for k, v in qs.items())
-        url = urlunparse(parsed._replace(query=new_query))
+        url = urlunparse(parsed._replace(query=""))
 
     if use_ssl:
         _engine_kwargs["connect_args"] = {"ssl": ssl.create_default_context()}
