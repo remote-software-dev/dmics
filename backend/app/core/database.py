@@ -1,27 +1,60 @@
 from collections.abc import AsyncGenerator
-
+import logging
 import ssl
+
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 from sqlalchemy.orm import DeclarativeBase
 
-from app.core.config import get_settings
+logger = logging.getLogger(__name__)
 
-settings = get_settings()
+_engine = None
+_session_factory = None
 
-_is_sqlite = settings.DATABASE_URL.startswith("sqlite")
-_is_neon = "neon.tech" in settings.DATABASE_URL
 
-_engine_kwargs = {"echo": False, "pool_pre_ping": True}
+def _get_engine():
+    global _engine, _session_factory
+    if _engine is not None:
+        return _engine, _session_factory
 
-if not _is_sqlite:
-    _engine_kwargs["pool_size"] = 20
-    _engine_kwargs["max_overflow"] = 10
+    from app.core.config import get_settings
+    settings = get_settings()
+    url = settings.DATABASE_URL
 
-if _is_neon:
-    _engine_kwargs["connect_args"] = {"ssl": ssl.create_default_context()}
+    if not url:
+        raise RuntimeError(
+            "DATABASE_URL is not set. Set POSTGRES_URL or DATABASE_URL in environment variables."
+        )
 
-engine = create_async_engine(settings.DATABASE_URL, **_engine_kwargs)
-async_session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+    _engine_kwargs = {"echo": False, "pool_pre_ping": True}
+    if url.startswith("sqlite"):
+        pass
+    else:
+        _engine_kwargs["pool_size"] = 5
+        _engine_kwargs["max_overflow"] = 2
+    if "neon.tech" in url or "sslmode" in url:
+        _engine_kwargs["connect_args"] = {"ssl": ssl.create_default_context()}
+
+    _engine = create_async_engine(url, **_engine_kwargs)
+    _session_factory = async_sessionmaker(_engine, class_=AsyncSession, expire_on_commit=False)
+    return _engine, _session_factory
+
+
+async def get_async_session_factory():
+    _, sf = _get_engine()
+    return sf
+
+
+async def create_tables():
+    engine, _ = _get_engine()
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    logger.info("Database tables created/verified.")
+
+
+# Backward-compatible alias — lazily resolved via _get_engine()
+async def _get_session_factory():
+    _, sf = _get_engine()
+    return sf
 
 
 class Base(DeclarativeBase):
@@ -29,7 +62,8 @@ class Base(DeclarativeBase):
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    async with async_session_factory() as session:
+    _, sf = _get_engine()
+    async with sf() as session:
         try:
             yield session
             await session.commit()

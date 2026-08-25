@@ -1,5 +1,1 @@
-from mangum import Mangum
-
-from backend_app.main import app
-
-handler = Mangum(app)
+from backend_app.main import app  # noqa: F401

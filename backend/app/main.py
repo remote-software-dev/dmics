@@ -15,11 +15,12 @@ settings = get_settings()
 async def _create_default_admin():
     """Auto-create a default admin user if no users exist (first-run bootstrap)."""
     from sqlalchemy import select
-    from app.core.database import async_session_factory
+    from app.core.database import get_async_session_factory
     from app.core.security import get_password_hash
     from app.models.models import User
 
-    async with async_session_factory() as db:
+    sf = await get_async_session_factory()
+    async with sf() as db:
         result = await db.execute(select(User).limit(1))
         if result.scalar_one_or_none() is not None:
             logger.info("Users already exist, skipping default admin creation.")
@@ -45,7 +46,15 @@ async def _create_default_admin():
 
 @asynccontextmanager
 async def lifespan(application: FastAPI):
-    await _create_default_admin()
+    try:
+        from app.core.database import create_tables
+        await create_tables()
+    except Exception as exc:
+        logger.warning("Table creation skipped: %s", exc)
+    try:
+        await _create_default_admin()
+    except Exception as exc:
+        logger.warning("Default admin creation skipped: %s", exc)
     yield
 
 
