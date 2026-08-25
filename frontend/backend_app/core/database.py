@@ -29,12 +29,26 @@ def _get_engine():
         url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
 
     _engine_kwargs = {"echo": False, "pool_pre_ping": True}
+
     if url.startswith("sqlite"):
         pass
     else:
         _engine_kwargs["pool_size"] = 5
         _engine_kwargs["max_overflow"] = 2
+
+    use_ssl = False
     if "neon.tech" in url or "sslmode" in url:
+        use_ssl = True
+
+    if "sslmode" in url:
+        from urllib.parse import urlparse, parse_qs, urlunparse
+        parsed = urlparse(url)
+        qs = parse_qs(parsed.query)
+        qs.pop("sslmode", None)
+        new_query = "&".join(f"{k}={v[0]}" for k, v in qs.items())
+        url = urlunparse(parsed._replace(query=new_query))
+
+    if use_ssl:
         _engine_kwargs["connect_args"] = {"ssl": ssl.create_default_context()}
 
     _engine = create_async_engine(url, **_engine_kwargs)
