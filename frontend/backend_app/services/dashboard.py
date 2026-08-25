@@ -3,7 +3,7 @@ from datetime import date, timedelta
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models.models import District, Population, Puskesmas, Province, ReportMR, ReportOPV
+from backend_app.models.models import District, Population, Puskesmas, Province, ReportMR, ReportOPV
 
 
 async def get_dashboard_stats(db: AsyncSession) -> dict:

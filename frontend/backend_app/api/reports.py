@@ -4,9 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.database import get_db
-from app.models.models import ReportMR
-from app.schemas.schemas import ReportMRCreate, ReportMRRead
+from backend_app.core.database import get_db
+from backend_app.models.models import ReportMR
+from backend_app.schemas.schemas import ReportMRCreate, ReportMRRead
 
 router = APIRouter(prefix="/reports/mr", tags=["Reports"])
 

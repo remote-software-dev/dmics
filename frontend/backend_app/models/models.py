@@ -4,7 +4,7 @@ from sqlalchemy import Boolean, DateTime, ForeignKey, Index, Integer, Numeric, S
 from sqlalchemy.dialects.postgresql import JSON, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.core.database import Base
+from backend_app.core.database import Base
 
 
 class Province(Base):

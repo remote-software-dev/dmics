@@ -4,9 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.database import get_db
-from app.models.models import ReportOPV
-from app.schemas.schemas import ReportOPVCreate, ReportOPVRead
+from backend_app.core.database import get_db
+from backend_app.models.models import ReportOPV
+from backend_app.schemas.schemas import ReportOPVCreate, ReportOPVRead
 
 router = APIRouter(prefix="/reports/opv", tags=["Reports"])
 

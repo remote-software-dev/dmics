@@ -4,9 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.database import get_db
-from app.models.models import Puskesmas
-from app.schemas.schemas import PuskesmasCreate, PuskesmasRead, PuskesmasUpdate
+from backend_app.core.database import get_db
+from backend_app.models.models import Puskesmas
+from backend_app.schemas.schemas import PuskesmasCreate, PuskesmasRead, PuskesmasUpdate
 
 router = APIRouter(prefix="/puskesmas", tags=["Puskesmas"])
 

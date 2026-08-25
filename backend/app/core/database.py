@@ -11,7 +11,7 @@ settings = get_settings()
 _is_sqlite = settings.DATABASE_URL.startswith("sqlite")
 _is_neon = "neon.tech" in settings.DATABASE_URL
 
-_engine_kwargs = {"echo": False}
+_engine_kwargs = {"echo": False, "pool_pre_ping": True}
 
 if not _is_sqlite:
     _engine_kwargs["pool_size"] = 20

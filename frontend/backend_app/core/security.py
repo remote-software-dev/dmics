@@ -3,7 +3,7 @@ from datetime import datetime, timedelta, timezone
 import bcrypt
 from jose import JWTError, jwt
 
-from app.core.config import get_settings
+from backend_app.core.config import get_settings
 
 settings = get_settings()
 

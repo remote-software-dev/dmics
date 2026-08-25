@@ -49,6 +49,28 @@ async def seed():
             counts[t] = (await db.execute(text(f"SELECT COUNT(*) FROM {t}"))).scalar() or 0
         print(f"Existing: {counts}")
 
+        # --- Seed default admin user ---
+        if counts["users"] == 0:
+            print("\nSeeding default admin user...")
+            from app.models.models import User
+
+            default_user = User(
+                username="081234567890",
+                password=get_password_hash("password"),
+                nama="Test User",
+                email="admin@dmics.test",
+                phone="081234567890",
+                province="31",
+                kabupaten="Jakarta Pusat",
+                position="admin",
+                legacy_hash="bcrypt",
+            )
+            db.add(default_user)
+            await db.commit()
+            print("  Created default admin: 081234567890 / password")
+        else:
+            print(f"\nUsers already exist ({counts['users']}), skipping user seed.")
+
         # --- Seed more subdistricts if sparse ---
         if counts["subdistricts"] < 10:
             print("\nSeeding more subdistricts...")

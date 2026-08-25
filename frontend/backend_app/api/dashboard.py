@@ -1,14 +1,14 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.database import get_db
-from app.schemas.schemas import (
+from backend_app.core.database import get_db
+from backend_app.schemas.schemas import (
     CoverageData,
     DashboardStats,
     ProvinceChartData,
     VaccinationTrend,
 )
-from app.services.dashboard import (
+from backend_app.services.dashboard import (
     get_by_province,
     get_coverage,
     get_dashboard_stats,

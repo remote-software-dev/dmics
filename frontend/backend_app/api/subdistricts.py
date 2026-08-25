@@ -4,9 +4,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.database import get_db
-from app.models.models import Subdistrict
-from app.schemas.schemas import SubdistrictCreate, SubdistrictRead, SubdistrictUpdate
+from backend_app.core.database import get_db
+from backend_app.models.models import Subdistrict
+from backend_app.schemas.schemas import SubdistrictCreate, SubdistrictRead, SubdistrictUpdate
 
 router = APIRouter(prefix="/subdistricts", tags=["Subdistricts"])
 

@@ -1,10 +1,53 @@
+import logging
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import auth, dashboard, districts, health, populations, provinces, puskesmas, reports, reports_opv, subdistricts
-from app.core.config import get_settings
+from backend_app.api import auth, dashboard, districts, health, populations, provinces, puskesmas, reports, reports_opv, subdistricts
+from backend_app.core.config import get_settings
+
+logger = logging.getLogger(__name__)
 
 settings = get_settings()
+
+
+async def _create_default_admin():
+    """Auto-create a default admin user if no users exist (first-run bootstrap)."""
+    from sqlalchemy import select
+    from backend_app.core.database import async_session_factory
+    from backend_app.core.security import get_password_hash
+    from backend_app.models.models import User
+
+    async with async_session_factory() as db:
+        result = await db.execute(select(User).limit(1))
+        if result.scalar_one_or_none() is not None:
+            logger.info("Users already exist, skipping default admin creation.")
+            return
+
+        user = User(
+            username="081234567890",
+            password=get_password_hash("password"),
+            nama="Test User",
+            email="admin@dmics.test",
+            phone="081234567890",
+            province="31",
+            kabupaten="Jakarta Pusat",
+            position="admin",
+            legacy_hash="bcrypt",
+        )
+        db.add(user)
+        await db.commit()
+        logger.info(
+            "Default admin created — Phone: 081234567890, Password: password"
+        )
+
+
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    await _create_default_admin()
+    yield
+
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -14,6 +57,7 @@ app = FastAPI(
     version="0.2.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
     openapi_tags=[
         {"name": "Health", "description": "API health check and status endpoints."},
         {"name": "Auth", "description": "Authentication endpoints."},
