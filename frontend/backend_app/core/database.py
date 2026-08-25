@@ -25,6 +25,9 @@ def _get_engine():
             "DATABASE_URL is not set. Set POSTGRES_URL or DATABASE_URL in environment variables."
         )
 
+    if url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+
     _engine_kwargs = {"echo": False, "pool_pre_ping": True}
     if url.startswith("sqlite"):
         pass
