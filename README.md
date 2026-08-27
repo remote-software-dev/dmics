@@ -28,34 +28,7 @@ This rewrite modernizes the stack while preserving all business logic.
 
 ## Architecture
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                        CLIENT (Browser)                         │
-│                  Next.js 14 + TypeScript + Tailwind             │
-└──────────────────────────┬──────────────────────────────────────┘
-                           │ HTTPS
-                           ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                     VERCEL EDGE NETWORK                         │
-│  ┌──────────────┐              ┌──────────────────────────────┐ │
-│  │   Frontend    │              │   API (Serverless Function)  │ │
-│  │   (SSR/CSR)   │              │       FastAPI + Mangum       │ │
-│  └──────┬───────┘              └──────────────┬───────────────┘ │
-│         │                                      │                 │
-└─────────┼──────────────────────────────────────┼─────────────────┘
-          │                                      │
-          │                                      ▼
-          │                         ┌────────────────────────┐
-          │                         │    Neon PostgreSQL     │
-          │                         │  (Serverless + SSL)    │
-          │                         └────────────────────────┘
-          │
-          ▼
-   ┌─────────────┐
-   │  Vercel CDN  │
-   │  (Static)    │
-   └─────────────┘
-```
+![Architecture Diagram](Architecture_Diagram.png)
 
 ### Request Flow
 
