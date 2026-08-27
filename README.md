@@ -110,16 +110,14 @@ npm run dev
 ## Database Schema
 
 ```
-provinces ─────┐
-               ├── districts ─────┐
-               │                  ├── subdistricts ─────┐
-               │                  │                     ├── puskesmas
-               │                  │
-               ├── reportmr ──────┤
-               │                  │
-               ├── reportopv ─────┘
-               │
-               └── populations
+provinces ─── districts ─── subdistricts ─── puskesmas
+                                        │          │
+                                        │          │
+                                   reportmr    reportopv
+                                   (by code)   (by code)
+
+populations (polymorphic: target_type + target_code)
+users       (references province, subdistrict_code, puskesmas by code)
 ```
 
 | Table | Purpose |
