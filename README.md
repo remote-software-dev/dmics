@@ -150,7 +150,7 @@ This project is a complete rewrite from a Laravel (PHP) application. Key improve
 - **Async I/O** — Non-blocking database queries via SQLAlchemy 2.0 + asyncpg
 - **Type Safety** — End-to-end TypeScript (frontend) + Pydantic (backend)
 - **Auto Documentation** — FastAPI generates OpenAPI specs from code
-- **Serverless** — Neon + Vercel for zero运维 infrastructure
+- **Serverless** — Neon + Vercel for zero infrastructure maintenance
 - **Performance** — ~3x faster response times in benchmarks (pending formal testing)
 
 See `guardrails/` for migration checklists and legacy API documentation.
