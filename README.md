@@ -4,7 +4,7 @@
 
 ## The Problem
 
-Indonesia's immunization campaigns (MR & OPV) require real-time monitoring across 34 provinces, 514 districts, and thousands of community health centers (Puskesmas). The legacy system built on Laravel/PHP lacked:
+Indonesia's immunization campaigns (MR & OPV) require real-time monitoring across 34 provinces, 514 districts, and thousands of community health centers (Puskesmas). The legacy system built on CodeIgniter/Laravel/PHP lacked:
 
 - **Performance** — Synchronous PHP processes bottlenecked during peak reporting hours
 - **Scalability** — Vertical scaling hit limits with growing data volume
