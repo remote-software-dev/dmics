@@ -54,7 +54,7 @@ export default function LoginPage() {
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
             >
-              Phone Number (e.g 081234567890)
+              Phone Number
             </label>
             <input
               id="username"
@@ -62,7 +62,7 @@ export default function LoginPage() {
               type="text"
               required
               className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="Enter your phone number"
+              placeholder="081236392504"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -81,7 +81,7 @@ export default function LoginPage() {
               type="password"
               required
               className="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-              placeholder="Enter your password"
+              placeholder="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
