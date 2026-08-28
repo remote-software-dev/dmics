@@ -54,7 +54,7 @@ export default function LoginPage() {
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
             >
-              Phone Number
+              Phone Number (e.g 081234567890)
             </label>
             <input
               id="username"
@@ -73,7 +73,7 @@ export default function LoginPage() {
               htmlFor="password"
               className="block text-sm font-medium text-gray-700"
             >
-              Password
+              Password (e.g password)
             </label>
             <input
               id="password"

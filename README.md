@@ -157,4 +157,4 @@ See `guardrails/` for migration checklists and legacy API documentation.
 
 ## License
 
-Private — Internal use only.
+MIT — License 
