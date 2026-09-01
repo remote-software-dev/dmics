@@ -18,9 +18,9 @@ import os
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from app.core.config import get_settings
-from app.core.security import get_password_hash
-from app.core.database import Base
+from backend_app.core.config import get_settings
+from backend_app.core.security import get_password_hash
+from backend_app.core.database import Base
 
 settings = get_settings()
 
@@ -52,7 +52,7 @@ async def seed():
         # --- Seed default admin user ---
         if counts["users"] == 0:
             print("\nSeeding default admin user...")
-            from app.models.models import User
+            from backend_app.models.models import User
 
             default_user = User(
                 username="081234567890",

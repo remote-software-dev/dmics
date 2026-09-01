@@ -6,9 +6,9 @@ import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from app.core.database import Base, get_db
-from app.main import app
-from app.core.security import get_password_hash
+from backend_app.core.database import Base, get_db
+from backend_app.main import app
+from backend_app.core.security import get_password_hash
 
 ASYNC_DATABASE_URL = "sqlite+aiosqlite:///:memory:"
 
@@ -43,7 +43,7 @@ async def async_session(async_engine):
 
 @pytest_asyncio.fixture(scope="function")
 async def seed_all(async_session: AsyncSession):
-    from app.models.models import (
+    from backend_app.models.models import (
         District, Population, Puskesmas, Province,
         ReportMR, ReportOPV, Subdistrict, User,
     )

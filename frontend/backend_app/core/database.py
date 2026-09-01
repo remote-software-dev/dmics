@@ -63,6 +63,12 @@ async def create_tables():
     logger.info("Database tables created/verified.")
 
 
+# Backward-compatible alias — lazily resolved via _get_engine()
+async def _get_session_factory():
+    _, sf = _get_engine()
+    return sf
+
+
 class Base(DeclarativeBase):
     pass
 

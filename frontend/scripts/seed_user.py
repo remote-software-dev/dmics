@@ -18,9 +18,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from app.core.config import get_settings
-from app.core.security import get_password_hash
-from app.models.models import User
+from backend_app.core.config import get_settings
+from backend_app.core.security import get_password_hash
+from backend_app.models.models import User
 
 settings = get_settings()
 

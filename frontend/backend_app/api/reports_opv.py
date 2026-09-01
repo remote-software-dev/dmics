@@ -37,7 +37,7 @@ async def list_opv_reports(
 )
 async def recent_opv_reports(
     page: int = Query(1, ge=1),
-    size: int = Query(10, ge=1, le=50),
+    size: int = Query(10, ge=1, le=10000),
     db: AsyncSession = Depends(get_db),
 ):
     total = (await db.execute(select(func.count(ReportOPV.id)))).scalar() or 0
