@@ -12,6 +12,7 @@ import {
   getToken,
   setToken as saveToken,
   removeToken,
+  setCookie,
   isAuthenticated as checkAuth,
 } from "@/lib/auth";
 
@@ -34,6 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const stored = getToken();
     if (stored && checkAuth()) {
       setTokenState(stored);
+      setCookie();
     } else {
       removeToken();
       setTokenState(null);
@@ -43,7 +45,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = useCallback(
     async (username: string, password: string) => {
-      const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
+      const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -58,7 +60,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const data = await res.json();
       saveToken(data.access_token);
       setTokenState(data.access_token);
-      router.push("/dashboard");
+
+      const params = new URLSearchParams(window.location.search);
+      const from = params.get("from") || "/dashboard";
+      router.push(from);
     },
     [router]
   );

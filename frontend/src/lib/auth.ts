@@ -16,6 +16,10 @@ export function removeToken(): void {
   document.cookie = `${TOKEN_COOKIE}=; path=/; max-age=0`;
 }
 
+export function setCookie(): void {
+  document.cookie = `${TOKEN_COOKIE}=1; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
+}
+
 export function isAuthenticated(): boolean {
   const token = getToken();
   if (!token) return false;
