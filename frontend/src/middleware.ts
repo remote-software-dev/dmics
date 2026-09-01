@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PUBLIC_PATHS = ["/login", "/api", "/_next", "/favicon.ico"];
+const PUBLIC_PATHS = ["/login", "/api", "/_next", "/favicon.ico", "/docs", "/openapi.json", "/redoc"];
 const AUTH_COOKIE = "dmics_auth";
 
 export function middleware(request: NextRequest) {
