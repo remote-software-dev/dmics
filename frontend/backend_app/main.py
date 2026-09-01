@@ -64,9 +64,8 @@ app = FastAPI(
     "Provides endpoints for managing vaccination campaign data across "
     "provinces, districts, subdistricts, and puskesmas in Indonesia.",
     version="0.2.0",
-    docs_url="/api/docs",
-    redoc_url="/api/redoc",
-    openapi_url="/api/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
     lifespan=lifespan,
     openapi_tags=[
         {"name": "Health", "description": "API health check and status endpoints."},

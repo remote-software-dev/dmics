@@ -16,6 +16,10 @@
       "dest": "api/index.py"
     },
     {
+      "src": "/(docs|openapi.json|redoc)",
+      "dest": "api/index.py"
+    },
+    {
       "handle": "filesystem"
     },
     {

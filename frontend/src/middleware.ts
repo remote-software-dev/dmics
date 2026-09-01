@@ -6,10 +6,6 @@ const AUTH_COOKIE = "dmics_auth";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname === "/docs" || pathname === "/openapi.json" || pathname === "/redoc") {
-    return NextResponse.rewrite(new URL(`/api${pathname}`, request.url));
-  }
-
   if (PUBLIC_PATHS.some((p) => pathname.startsWith(p))) {
     return NextResponse.next();
   }
