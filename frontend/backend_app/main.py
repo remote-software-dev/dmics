@@ -99,3 +99,8 @@ app.include_router(puskesmas.router, prefix=settings.API_V1_PREFIX)
 app.include_router(populations.router, prefix=settings.API_V1_PREFIX)
 app.include_router(reports.router, prefix=settings.API_V1_PREFIX)
 app.include_router(reports_opv.router, prefix=settings.API_V1_PREFIX)
+
+
+@app.get("/api/ping")
+async def ping():
+    return {"ping": "pong", "docs_url": app.docs_url, "version": "0.2.1"}
