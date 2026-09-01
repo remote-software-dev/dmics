@@ -64,8 +64,9 @@ app = FastAPI(
     "Provides endpoints for managing vaccination campaign data across "
     "provinces, districts, subdistricts, and puskesmas in Indonesia.",
     version="0.2.0",
-    docs_url="/docs",
-    redoc_url="/redoc",
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json",
     lifespan=lifespan,
     openapi_tags=[
         {"name": "Health", "description": "API health check and status endpoints."},
@@ -88,7 +89,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(health.router)
+app.include_router(health.router, prefix=settings.API_V1_PREFIX)
 app.include_router(auth.router, prefix=settings.API_V1_PREFIX)
 app.include_router(dashboard.router, prefix=settings.API_V1_PREFIX)
 app.include_router(provinces.router, prefix=settings.API_V1_PREFIX)
