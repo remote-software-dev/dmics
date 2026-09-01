@@ -26,7 +26,14 @@ settings = get_settings()
 
 
 async def seed_user(phone: str, password: str, nama: str, email: str, province: str, position: str):
-    engine = create_async_engine(settings.DATABASE_URL, echo=False)
+    url = settings.DATABASE_URL
+    if url.startswith("postgresql://"):
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    if "?" in url:
+        from urllib.parse import urlparse, urlunparse
+        parsed = urlparse(url)
+        url = urlunparse(parsed._replace(query=""))
+    engine = create_async_engine(url, echo=False)
     session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
     async with session_factory() as db:
