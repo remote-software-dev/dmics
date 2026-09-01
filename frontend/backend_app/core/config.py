@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "dmics-secret-key-change-in-production-2026"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24
 
-    model_config = {"env_file": (".env", ".env.local"), "env_file_encoding": "utf-8"}
+    model_config = {"env_file": (".env", ".env.local"), "env_file_encoding": "utf-8", "extra": "ignore"}
 
     @model_validator(mode="after")
     def resolve_database_url(self):
