@@ -29,7 +29,7 @@ export default function NotReportedPage() {
 
     try {
       const API_BASE =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        "";
       const headers = { Authorization: `Bearer ${token}` };
 
       const [puskesmasRes, districtsRes, provincesRes] = await Promise.all([

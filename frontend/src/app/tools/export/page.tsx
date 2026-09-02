@@ -20,7 +20,7 @@ export default function ExportDataPage() {
   useEffect(() => {
     if (!token) return;
     const API_BASE =
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      "";
     fetch(`${API_BASE}/api/v1/provinces/`, {
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -37,7 +37,7 @@ export default function ExportDataPage() {
 
     try {
       const API_BASE =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        "";
       const params = new URLSearchParams({
         campaign_type: campaignType,
         format: fileFormat,
