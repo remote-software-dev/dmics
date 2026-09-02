@@ -31,7 +31,7 @@ export default function CodelistPage() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const API_BASE =
-          process.env.NEXT_API_URL || "http://localhost:8000";
+          process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
         const [provRes, distRes, subRes, puskRes] = await Promise.all([
           fetch(`${API_BASE}/api/v1/provinces/`, { headers }).then((r) =>
             r.json()
