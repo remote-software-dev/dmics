@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 interface Province {
   id: number;
@@ -45,9 +46,9 @@ export default function CreatePuskesmasPage() {
     if (!token) return;
     const headers = { Authorization: "Bearer " + token };
     Promise.all([
-      fetch("/api/v1/provinces/", { headers }).then((r) => r.json()),
-      fetch("/api/v1/districts/", { headers }).then((r) => r.json()),
-      fetch("/api/v1/subdistricts/", { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/subdistricts/", { headers }).then((r) => r.json()),
     ])
       .then(([provData, distData, subData]) => {
         setProvinces(Array.isArray(provData) ? provData : provData.items || []);
@@ -86,7 +87,7 @@ export default function CreatePuskesmasPage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch("/api/v1/puskesmas/", {
+      const res = await fetch(`${API_BASE}/api/v1/puskesmas/", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

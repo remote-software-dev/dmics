@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Province, ReportMR, ReportOPV, PaginatedReports } from "@/lib/types";
 import { BarChart3, FileText, MapPin } from "lucide-react";
+import { API_BASE } from "@/lib/api";
 
 export default function ProvinceReportsPage() {
   const { token } = useAuth();
@@ -22,9 +23,9 @@ export default function ProvinceReportsPage() {
     async function load() {
       try {
         const [provRes, mrRes, opvRes] = await Promise.all([
-          fetch("/api/v1/provinces/", { headers }).then((r) => r.json()),
-          fetch("/api/v1/reports/mr/recent?size=10000", { headers }).then((r) => r.json()),
-          fetch("/api/v1/reports/opv/recent?size=10000", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/reports/mr/recent?size=10000", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/reports/opv/recent?size=10000", { headers }).then((r) => r.json()),
         ]);
         setProvinces(provRes);
         setMrReports(((mrRes as PaginatedReports).items || []) as ReportMR[]);

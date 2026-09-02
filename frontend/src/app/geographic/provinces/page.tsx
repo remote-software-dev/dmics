@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 interface Province {
   id: number;
@@ -24,7 +25,7 @@ export default function ProvincesPage() {
     if (!token) return;
     try {
       setLoading(true);
-      const res = await fetch("/api/v1/provinces/", {
+      const res = await fetch(`${API_BASE}/api/v1/provinces/", {
         headers: { Authorization: "Bearer " + token },
       });
       if (!res.ok) throw new Error("Failed to fetch provinces");
@@ -45,7 +46,7 @@ export default function ProvincesPage() {
     if (!confirm("Are you sure you want to delete this province?")) return;
     if (!token) return;
     try {
-      const res = await fetch(`/api/v1/provinces/${id}`, {
+      const res = await fetch(`${API_BASE}/api/v1/provinces/${id}`, {
         method: "DELETE",
         headers: { Authorization: "Bearer " + token },
       });

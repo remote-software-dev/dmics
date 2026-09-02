@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Province, District, Puskesmas, ReportMR, ReportOPV, PaginatedReports } from "@/lib/types";
 import { FileText, MapPin, Building2, Stethoscope } from "lucide-react";
+import { API_BASE } from "@/lib/api";
 
 export default function PuskesmasReportsPage() {
   const { token } = useAuth();
@@ -26,11 +27,11 @@ export default function PuskesmasReportsPage() {
     async function load() {
       try {
         const [provRes, distRes, pkmRes, mrRes, opvRes] = await Promise.all([
-          fetch("/api/v1/provinces/", { headers }).then((r) => r.json()),
-          fetch("/api/v1/districts/", { headers }).then((r) => r.json()),
-          fetch("/api/v1/puskesmas/", { headers }).then((r) => r.json()),
-          fetch("/api/v1/reports/mr/recent?size=10000", { headers }).then((r) => r.json()),
-          fetch("/api/v1/reports/opv/recent?size=10000", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/puskesmas/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/reports/mr/recent?size=10000", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/reports/opv/recent?size=10000", { headers }).then((r) => r.json()),
         ]);
         setProvinces(provRes);
         setDistricts(distRes);

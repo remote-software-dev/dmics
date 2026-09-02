@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 interface District {
   id: number;
@@ -34,8 +35,8 @@ export default function DistrictsPage() {
       setLoading(true);
       const headers = { Authorization: "Bearer " + token };
       const [distRes, provRes] = await Promise.all([
-        fetch("/api/v1/districts/", { headers }),
-        fetch("/api/v1/provinces/", { headers }),
+        fetch(`${API_BASE}/api/v1/districts/", { headers }),
+        fetch(`${API_BASE}/api/v1/provinces/", { headers }),
       ]);
       if (!distRes.ok) throw new Error("Failed to fetch districts");
       const distData = await distRes.json();
@@ -61,7 +62,7 @@ export default function DistrictsPage() {
     if (!confirm("Are you sure you want to delete this district?")) return;
     if (!token) return;
     try {
-      const res = await fetch(`/api/v1/districts/${id}`, {
+      const res = await fetch(`${API_BASE}/api/v1/districts/${id}`, {
         method: "DELETE",
         headers: { Authorization: "Bearer " + token },
       });

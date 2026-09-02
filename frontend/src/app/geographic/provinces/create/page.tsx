@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 export default function CreateProvincePage() {
   const { token } = useAuth();
@@ -32,7 +33,7 @@ export default function CreateProvincePage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch("/api/v1/provinces/", {
+      const res = await fetch(`${API_BASE}/api/v1/provinces/", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

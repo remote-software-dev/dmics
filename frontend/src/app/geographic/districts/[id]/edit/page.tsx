@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 interface Province {
   id: number;
@@ -32,8 +33,8 @@ export default function EditDistrictPage() {
     if (!token || !id) return;
     const headers = { Authorization: "Bearer " + token };
     Promise.all([
-      fetch(`/api/v1/districts/${id}`, { headers }).then((r) => r.json()),
-      fetch("/api/v1/provinces/", { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/districts/${id}`, { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
     ])
       .then(([distData, provData]) => {
         setForm({
@@ -65,7 +66,7 @@ export default function EditDistrictPage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch(`/api/v1/districts/${id}`, {
+      const res = await fetch(`${API_BASE}/api/v1/districts/${id}`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,

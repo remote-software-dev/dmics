@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 interface Subdistrict {
   id: number;
@@ -32,8 +33,8 @@ export default function SubdistrictsPage() {
       setLoading(true);
       const headers = { Authorization: "Bearer " + token };
       const [subRes, distRes] = await Promise.all([
-        fetch("/api/v1/subdistricts/", { headers }),
-        fetch("/api/v1/districts/", { headers }),
+        fetch(`${API_BASE}/api/v1/subdistricts/", { headers }),
+        fetch(`${API_BASE}/api/v1/districts/", { headers }),
       ]);
       if (!subRes.ok) throw new Error("Failed to fetch subdistricts");
       const subData = await subRes.json();
@@ -59,7 +60,7 @@ export default function SubdistrictsPage() {
     if (!confirm("Are you sure you want to delete this subdistrict?")) return;
     if (!token) return;
     try {
-      const res = await fetch(`/api/v1/subdistricts/${id}`, {
+      const res = await fetch(`${API_BASE}/api/v1/subdistricts/${id}`, {
         method: "DELETE",
         headers: { Authorization: "Bearer " + token },
       });

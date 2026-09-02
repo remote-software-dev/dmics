@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 interface District {
   id: number;
@@ -25,7 +26,7 @@ export default function CreateSubdistrictPage() {
 
   useEffect(() => {
     if (!token) return;
-    fetch("/api/v1/districts/", {
+    fetch(`${API_BASE}/api/v1/districts/", {
       headers: { Authorization: "Bearer " + token },
     })
       .then((res) => res.json())
@@ -48,7 +49,7 @@ export default function CreateSubdistrictPage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch("/api/v1/subdistricts/", {
+      const res = await fetch(`${API_BASE}/api/v1/subdistricts/", {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

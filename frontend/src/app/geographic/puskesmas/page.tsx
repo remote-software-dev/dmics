@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 interface Puskesmas {
   id: number;
@@ -50,10 +51,10 @@ export default function PuskesmasPage() {
       setLoading(true);
       const headers = { Authorization: "Bearer " + token };
       const [pusRes, provRes, distRes, subRes] = await Promise.all([
-        fetch("/api/v1/puskesmas/", { headers }),
-        fetch("/api/v1/provinces/", { headers }),
-        fetch("/api/v1/districts/", { headers }),
-        fetch("/api/v1/subdistricts/", { headers }),
+        fetch(`${API_BASE}/api/v1/puskesmas/", { headers }),
+        fetch(`${API_BASE}/api/v1/provinces/", { headers }),
+        fetch(`${API_BASE}/api/v1/districts/", { headers }),
+        fetch(`${API_BASE}/api/v1/subdistricts/", { headers }),
       ]);
       if (!pusRes.ok) throw new Error("Failed to fetch puskesmas");
       const pusData = await pusRes.json();
@@ -83,7 +84,7 @@ export default function PuskesmasPage() {
     if (!confirm("Are you sure you want to delete this puskesmas?")) return;
     if (!token) return;
     try {
-      const res = await fetch(`/api/v1/puskesmas/${id}`, {
+      const res = await fetch(`${API_BASE}/api/v1/puskesmas/${id}`, {
         method: "DELETE",
         headers: { Authorization: "Bearer " + token },
       });

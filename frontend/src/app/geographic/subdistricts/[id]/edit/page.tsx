@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 interface District {
   id: number;
@@ -30,8 +31,8 @@ export default function EditSubdistrictPage() {
     if (!token || !id) return;
     const headers = { Authorization: "Bearer " + token };
     Promise.all([
-      fetch(`/api/v1/subdistricts/${id}`, { headers }).then((r) => r.json()),
-      fetch("/api/v1/districts/", { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/subdistricts/${id}`, { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
     ])
       .then(([subData, distData]) => {
         setForm({
@@ -61,7 +62,7 @@ export default function EditSubdistrictPage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch(`/api/v1/subdistricts/${id}`, {
+      const res = await fetch(`${API_BASE}/api/v1/subdistricts/${id}`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { AlertTriangle, RefreshCw } from "lucide-react";
 import { Province, District, ReportMR, ReportOPV } from "@/lib/types";
+import { API_BASE } from "@/lib/api";
 
 export default function DataRevisionPage() {
   const { token } = useAuth();
@@ -26,8 +27,8 @@ export default function DataRevisionPage() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const [provRes, distRes] = await Promise.all([
-          fetch("/api/v1/provinces/", { headers }).then((r) => r.json()),
-          fetch("/api/v1/districts/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
         ]);
         setProvinces(provRes);
         setAllDistricts(distRes);
@@ -54,8 +55,8 @@ export default function DataRevisionPage() {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const [mrRes, opvRes] = await Promise.all([
-        fetch("/api/v1/reports/mr/recent?page=1&size=100", { headers }).then((r) => r.json()),
-        fetch("/api/v1/reports/opv/recent?page=1&size=100", { headers }).then((r) => r.json()),
+        fetch(`${API_BASE}/api/v1/reports/mr/recent?page=1&size=100", { headers }).then((r) => r.json()),
+        fetch(`${API_BASE}/api/v1/reports/opv/recent?page=1&size=100", { headers }).then((r) => r.json()),
       ]);
       let mrItems: ReportMR[] = mrRes.items || [];
       let opvItems: ReportOPV[] = opvRes.items || [];

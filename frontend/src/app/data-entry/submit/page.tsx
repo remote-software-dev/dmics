@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Send } from "lucide-react";
 import { Province, District, Puskesmas, Subdistrict } from "@/lib/types";
+import { API_BASE } from "@/lib/api";
 
 export default function SubmitReportPage() {
   const { token } = useAuth();
@@ -37,10 +38,10 @@ export default function SubmitReportPage() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const [provRes, distRes, puskRes, subRes] = await Promise.all([
-          fetch("/api/v1/provinces/", { headers }).then((r) => r.json()),
-          fetch("/api/v1/districts/", { headers }).then((r) => r.json()),
-          fetch("/api/v1/puskesmas/", { headers }).then((r) => r.json()),
-          fetch("/api/v1/subdistricts/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/puskesmas/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/subdistricts/", { headers }).then((r) => r.json()),
         ]);
         setProvinces(provRes);
         setAllDistricts(distRes);

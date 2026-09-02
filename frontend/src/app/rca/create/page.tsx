@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Save } from "lucide-react";
 import { Puskesmas } from "@/lib/types";
+import { API_BASE } from "@/lib/api";
 
 export default function CreateRCAReportPage() {
   const { token } = useAuth();
@@ -29,7 +30,7 @@ export default function CreateRCAReportPage() {
     async function load() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
-        const puskRes = await fetch("/api/v1/puskesmas/", { headers }).then((r) => r.json());
+        const puskRes = await fetch(`${API_BASE}/api/v1/puskesmas/", { headers }).then((r) => r.json());
         setPuskesmasList(puskRes);
       } catch {
         setError("Failed to load puskesmas data.");
@@ -61,7 +62,7 @@ export default function CreateRCAReportPage() {
     };
 
     try {
-      const res = await fetch("/api/v1/reports/mr", {
+      const res = await fetch(`${API_BASE}/api/v1/reports/mr", {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(body),

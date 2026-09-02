@@ -15,6 +15,7 @@ import {
   setCookie,
   isAuthenticated as checkAuth,
 } from "@/lib/auth";
+import { API_BASE } from "@/lib/api";
 
 interface AuthContextType {
   token: string | null;
@@ -45,7 +46,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = useCallback(
     async (username: string, password: string) => {
-      const API_BASE = "";
       const res = await fetch(`${API_BASE}/api/v1/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

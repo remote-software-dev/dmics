@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
+import { API_BASE } from "@/lib/api";
 
 export default function EditProvincePage() {
   const { token } = useAuth();
@@ -23,7 +24,7 @@ export default function EditProvincePage() {
 
   useEffect(() => {
     if (!token || !id) return;
-    fetch(`/api/v1/provinces/${id}`, {
+    fetch(`${API_BASE}/api/v1/provinces/${id}`, {
       headers: { Authorization: "Bearer " + token },
     })
       .then((res) => {
@@ -57,7 +58,7 @@ export default function EditProvincePage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch(`/api/v1/provinces/${id}`, {
+      const res = await fetch(`${API_BASE}/api/v1/provinces/${id}`, {
         method: "PUT",
         headers: {
           Authorization: "Bearer " + token,
