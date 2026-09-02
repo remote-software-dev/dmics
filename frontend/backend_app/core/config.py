@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     API_V1_PREFIX: str = "/api/v1"
     PROJECT_NAME: str = "DMICS API"
     CORS_ORIGINS: list[str] = ["http://localhost:3000", "https://dmics.vercel.app"]
+    CORS_ORIGIN_REGEX: str = r"https://.*\.ict-4-d\.vercel\.app"
     SECRET_KEY: str = "dmics-secret-key-change-in-production-2026"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24
 
