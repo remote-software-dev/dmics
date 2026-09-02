@@ -21,7 +21,7 @@ import {
   PuskesmasCreateRequest,
 } from "./types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = process.env.NEXT_API_URL ?? "";
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const token = getToken();

@@ -50,7 +50,7 @@ export default function UploadDataPage() {
       formData.append("file", file);
 
       const API_BASE =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+        process.env.NEXT_API_URL || "http://localhost:8000";
       const res = await fetch(`${API_BASE}/api/v1/upload`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
