@@ -32,7 +32,7 @@ export default function EditSubdistrictPage() {
     const headers = { Authorization: "Bearer " + token };
     Promise.all([
       fetch(`${API_BASE}/api/v1/subdistricts/${id}`, { headers }).then((r) => r.json()),
-      fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/districts/`, { headers }).then((r) => r.json()),
     ])
       .then(([subData, distData]) => {
         setForm({

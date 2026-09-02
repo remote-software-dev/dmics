@@ -51,10 +51,10 @@ export default function PuskesmasPage() {
       setLoading(true);
       const headers = { Authorization: "Bearer " + token };
       const [pusRes, provRes, distRes, subRes] = await Promise.all([
-        fetch(`${API_BASE}/api/v1/puskesmas/", { headers }),
-        fetch(`${API_BASE}/api/v1/provinces/", { headers }),
-        fetch(`${API_BASE}/api/v1/districts/", { headers }),
-        fetch(`${API_BASE}/api/v1/subdistricts/", { headers }),
+        fetch(`${API_BASE}/api/v1/puskesmas/`, { headers }),
+        fetch(`${API_BASE}/api/v1/provinces/`, { headers }),
+        fetch(`${API_BASE}/api/v1/districts/`, { headers }),
+        fetch(`${API_BASE}/api/v1/subdistricts/`, { headers }),
       ]);
       if (!pusRes.ok) throw new Error("Failed to fetch puskesmas");
       const pusData = await pusRes.json();

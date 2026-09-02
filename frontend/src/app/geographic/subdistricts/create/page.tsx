@@ -26,7 +26,7 @@ export default function CreateSubdistrictPage() {
 
   useEffect(() => {
     if (!token) return;
-    fetch(`${API_BASE}/api/v1/districts/", {
+    fetch(`${API_BASE}/api/v1/districts/`, {
       headers: { Authorization: "Bearer " + token },
     })
       .then((res) => res.json())
@@ -49,7 +49,7 @@ export default function CreateSubdistrictPage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch(`${API_BASE}/api/v1/subdistricts/", {
+      const res = await fetch(`${API_BASE}/api/v1/subdistricts/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

@@ -25,7 +25,7 @@ export default function ProvincesPage() {
     if (!token) return;
     try {
       setLoading(true);
-      const res = await fetch(`${API_BASE}/api/v1/provinces/", {
+      const res = await fetch(`${API_BASE}/api/v1/provinces/`, {
         headers: { Authorization: "Bearer " + token },
       });
       if (!res.ok) throw new Error("Failed to fetch provinces");

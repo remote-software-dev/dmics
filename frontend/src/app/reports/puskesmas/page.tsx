@@ -27,11 +27,11 @@ export default function PuskesmasReportsPage() {
     async function load() {
       try {
         const [provRes, distRes, pkmRes, mrRes, opvRes] = await Promise.all([
-          fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
-          fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
-          fetch(`${API_BASE}/api/v1/puskesmas/", { headers }).then((r) => r.json()),
-          fetch(`${API_BASE}/api/v1/reports/mr/recent?size=10000", { headers }).then((r) => r.json()),
-          fetch(`${API_BASE}/api/v1/reports/opv/recent?size=10000", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/provinces/`, { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/districts/`, { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/puskesmas/`, { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/reports/mr/recent?size=10000`, { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/reports/opv/recent?size=10000`, { headers }).then((r) => r.json()),
         ]);
         setProvinces(provRes);
         setDistricts(distRes);

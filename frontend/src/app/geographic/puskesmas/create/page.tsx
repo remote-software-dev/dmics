@@ -46,9 +46,9 @@ export default function CreatePuskesmasPage() {
     if (!token) return;
     const headers = { Authorization: "Bearer " + token };
     Promise.all([
-      fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
-      fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
-      fetch(`${API_BASE}/api/v1/subdistricts/", { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/provinces/`, { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/districts/`, { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/subdistricts/`, { headers }).then((r) => r.json()),
     ])
       .then(([provData, distData, subData]) => {
         setProvinces(Array.isArray(provData) ? provData : provData.items || []);
@@ -87,7 +87,7 @@ export default function CreatePuskesmasPage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch(`${API_BASE}/api/v1/puskesmas/", {
+      const res = await fetch(`${API_BASE}/api/v1/puskesmas/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

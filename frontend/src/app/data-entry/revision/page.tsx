@@ -27,8 +27,8 @@ export default function DataRevisionPage() {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const [provRes, distRes] = await Promise.all([
-          fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
-          fetch(`${API_BASE}/api/v1/districts/", { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/provinces/`, { headers }).then((r) => r.json()),
+          fetch(`${API_BASE}/api/v1/districts/`, { headers }).then((r) => r.json()),
         ]);
         setProvinces(provRes);
         setAllDistricts(distRes);
@@ -55,8 +55,8 @@ export default function DataRevisionPage() {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const [mrRes, opvRes] = await Promise.all([
-        fetch(`${API_BASE}/api/v1/reports/mr/recent?page=1&size=100", { headers }).then((r) => r.json()),
-        fetch(`${API_BASE}/api/v1/reports/opv/recent?page=1&size=100", { headers }).then((r) => r.json()),
+        fetch(`${API_BASE}/api/v1/reports/mr/recent?page=1&size=100`, { headers }).then((r) => r.json()),
+        fetch(`${API_BASE}/api/v1/reports/opv/recent?page=1&size=100`, { headers }).then((r) => r.json()),
       ]);
       let mrItems: ReportMR[] = mrRes.items || [];
       let opvItems: ReportOPV[] = opvRes.items || [];

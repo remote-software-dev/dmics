@@ -33,7 +33,7 @@ export default function CreateProvincePage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch(`${API_BASE}/api/v1/provinces/", {
+      const res = await fetch(`${API_BASE}/api/v1/provinces/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

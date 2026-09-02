@@ -34,7 +34,7 @@ export default function EditDistrictPage() {
     const headers = { Authorization: "Bearer " + token };
     Promise.all([
       fetch(`${API_BASE}/api/v1/districts/${id}`, { headers }).then((r) => r.json()),
-      fetch(`${API_BASE}/api/v1/provinces/", { headers }).then((r) => r.json()),
+      fetch(`${API_BASE}/api/v1/provinces/`, { headers }).then((r) => r.json()),
     ])
       .then(([distData, provData]) => {
         setForm({

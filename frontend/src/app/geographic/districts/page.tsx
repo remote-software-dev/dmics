@@ -35,8 +35,8 @@ export default function DistrictsPage() {
       setLoading(true);
       const headers = { Authorization: "Bearer " + token };
       const [distRes, provRes] = await Promise.all([
-        fetch(`${API_BASE}/api/v1/districts/", { headers }),
-        fetch(`${API_BASE}/api/v1/provinces/", { headers }),
+        fetch(`${API_BASE}/api/v1/districts/`, { headers }),
+        fetch(`${API_BASE}/api/v1/provinces/`, { headers }),
       ]);
       if (!distRes.ok) throw new Error("Failed to fetch districts");
       const distData = await distRes.json();

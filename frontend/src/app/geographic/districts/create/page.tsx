@@ -28,7 +28,7 @@ export default function CreateDistrictPage() {
 
   useEffect(() => {
     if (!token) return;
-    fetch(`${API_BASE}/api/v1/provinces/", {
+    fetch(`${API_BASE}/api/v1/provinces/`, {
       headers: { Authorization: "Bearer " + token },
     })
       .then((res) => res.json())
@@ -51,7 +51,7 @@ export default function CreateDistrictPage() {
     try {
       setSaving(true);
       setError(null);
-      const res = await fetch(`${API_BASE}/api/v1/districts/", {
+      const res = await fetch(`${API_BASE}/api/v1/districts/`, {
         method: "POST",
         headers: {
           Authorization: "Bearer " + token,

@@ -33,8 +33,8 @@ export default function SubdistrictsPage() {
       setLoading(true);
       const headers = { Authorization: "Bearer " + token };
       const [subRes, distRes] = await Promise.all([
-        fetch(`${API_BASE}/api/v1/subdistricts/", { headers }),
-        fetch(`${API_BASE}/api/v1/districts/", { headers }),
+        fetch(`${API_BASE}/api/v1/subdistricts/`, { headers }),
+        fetch(`${API_BASE}/api/v1/districts/`, { headers }),
       ]);
       if (!subRes.ok) throw new Error("Failed to fetch subdistricts");
       const subData = await subRes.json();
