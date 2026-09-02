@@ -11,7 +11,7 @@ from backend_app.schemas.schemas import SubdistrictCreate, SubdistrictRead, Subd
 router = APIRouter(prefix="/subdistricts", tags=["Subdistricts"])
 
 
-@router.get("/", response_model=list[SubdistrictRead], summary="List all subdistricts")
+@router.get("", response_model=list[SubdistrictRead], summary="List all subdistricts")
 async def list_subdistricts(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(Subdistrict).order_by(Subdistrict.name))
     return result.scalars().all()
@@ -26,7 +26,7 @@ async def get_subdistrict(subdistrict_id: str, db: AsyncSession = Depends(get_db
     return subdistrict
 
 
-@router.post("/", response_model=SubdistrictRead, status_code=201, summary="Create subdistrict")
+@router.post("", response_model=SubdistrictRead, status_code=201, summary="Create subdistrict")
 async def create_subdistrict(data: SubdistrictCreate, db: AsyncSession = Depends(get_db)):
     subdistrict = Subdistrict(**data.model_dump())
     db.add(subdistrict)

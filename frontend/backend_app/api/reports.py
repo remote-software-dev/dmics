@@ -12,7 +12,7 @@ router = APIRouter(prefix="/reports/mr", tags=["Reports"])
 
 
 @router.get(
-    "/",
+    "",
     response_model=list[ReportMRRead],
     summary="List MR vaccination reports",
     description="Retrieve all Measles-Rubella (MR) vaccination reports.",
@@ -69,7 +69,7 @@ async def get_mr_report(report_id: str, db: AsyncSession = Depends(get_db)):
 
 
 @router.post(
-    "/",
+    "",
     response_model=ReportMRRead,
     status_code=201,
     summary="Create MR report",

@@ -12,7 +12,7 @@ router = APIRouter(prefix="/reports/opv", tags=["Reports"])
 
 
 @router.get(
-    "/",
+    "",
     response_model=list[ReportOPVRead],
     summary="List OPV vaccination reports",
     description="Retrieve all Oral Polio Vaccine (OPV) vaccination reports.",
@@ -69,7 +69,7 @@ async def get_opv_report(report_id: str, db: AsyncSession = Depends(get_db)):
 
 
 @router.post(
-    "/",
+    "",
     response_model=ReportOPVRead,
     status_code=201,
     summary="Create OPV report",

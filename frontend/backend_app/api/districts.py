@@ -10,7 +10,7 @@ router = APIRouter(prefix="/districts", tags=["Districts"])
 
 
 @router.get(
-    "/",
+    "",
     response_model=list[DistrictRead],
     summary="List all districts",
     description="Retrieve a list of all districts with their codes, province references, and coordinates.",

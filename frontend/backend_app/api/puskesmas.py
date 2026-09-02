@@ -11,7 +11,7 @@ from backend_app.schemas.schemas import PuskesmasCreate, PuskesmasRead, Puskesma
 router = APIRouter(prefix="/puskesmas", tags=["Puskesmas"])
 
 
-@router.get("/", response_model=list[PuskesmasRead], summary="List all puskesmas")
+@router.get("", response_model=list[PuskesmasRead], summary="List all puskesmas")
 async def list_puskesmas(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(Puskesmas).order_by(Puskesmas.name))
     return result.scalars().all()
@@ -26,7 +26,7 @@ async def get_puskesmas(puskesmas_id: str, db: AsyncSession = Depends(get_db)):
     return puskesmas
 
 
-@router.post("/", response_model=PuskesmasRead, status_code=201, summary="Create puskesmas")
+@router.post("", response_model=PuskesmasRead, status_code=201, summary="Create puskesmas")
 async def create_puskesmas(data: PuskesmasCreate, db: AsyncSession = Depends(get_db)):
     puskesmas = Puskesmas(**data.model_dump())
     db.add(puskesmas)

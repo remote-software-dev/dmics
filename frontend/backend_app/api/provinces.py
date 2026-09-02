@@ -10,7 +10,7 @@ router = APIRouter(prefix="/provinces", tags=["Provinces"])
 
 
 @router.get(
-    "/",
+    "",
     response_model=list[ProvinceRead],
     summary="List all provinces",
     description="Retrieve a list of all provinces with their codes, names, and coordinates.",

@@ -11,7 +11,7 @@ from backend_app.schemas.schemas import PopulationCreate, PopulationRead, Popula
 router = APIRouter(prefix="/populations", tags=["Populations"])
 
 
-@router.get("/", response_model=list[PopulationRead], summary="List all populations")
+@router.get("", response_model=list[PopulationRead], summary="List all populations")
 async def list_populations(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(Population).order_by(Population.target_type))
     return result.scalars().all()
@@ -26,7 +26,7 @@ async def get_population(population_id: str, db: AsyncSession = Depends(get_db))
     return population
 
 
-@router.post("/", response_model=PopulationRead, status_code=201, summary="Create population")
+@router.post("", response_model=PopulationRead, status_code=201, summary="Create population")
 async def create_population(data: PopulationCreate, db: AsyncSession = Depends(get_db)):
     population = Population(**data.model_dump())
     db.add(population)
