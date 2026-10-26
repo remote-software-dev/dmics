@@ -172,6 +172,11 @@ async def _load_geography(db: AsyncSession) -> dict[str, list[dict]]:
         .join(District, Puskesmas.district_id == District.id)
         .join(Province, Puskesmas.province_id == Province.id)
         .join(Subdistrict, Puskesmas.subdistrict_id == Subdistrict.id)
+        .where(
+            Province.is_active.is_(True),
+            District.is_active.is_(True),
+            Subdistrict.is_active.is_(True),
+        )
         .order_by(Province.code, District.code, Puskesmas.code)
     )
 
